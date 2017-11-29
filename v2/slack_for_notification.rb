@@ -12,25 +12,27 @@ class SlackForNotification
   BIRTHDAY_STATEMENT        = 'そして、なんと明日誕生日のメンターが!!! そのメンターは...!!!'
   CELERATION_ENCOURAGEMENT_STATEMENT = '明日会ったときに、「誕生日おめでとう」と言おう！'
 
+  @notifier = SlackNotifier.notifier
+
   class << self
     def sends_starter_notification
-      SlackNotifier.notifier_instance.post(text: STARTER_NOTIFICATION)
-      SlackNotifier.notifier_instance.post(text: HOPING_REACTION_STATEMENT)
+      SlackNotifier.post(text: STARTER_NOTIFICATION)
+      SlackNotifier.post(text: HOPING_REACTION_STATEMENT)
     end
 
-    def sends_shift_notification(calendar_item)
-      notification = "<#{calendar_item.mentor.mention}> : #{calendar_item.calendar_name} : #{calendar_item.start_time}"
-      SlackNotifier.notifier_instance.post(text: notification)
+    def sends_shift_notification(mention:, calendar_name:, start_time:)
+      notification = "<#{mention}> : #{calendar_name} : #{start_time}"
+      SlackNotifier.post(text: notification)
     end
 
-    def sends_birthday_notification(calendar_item)
-      SlackNotifier.notifier_instance.post(text: BIRTHDAY_STATEMENT)
-      SlackNotifier.notifier_instance.post(text: "<#{calendar_item.mentor.mention}>#{calendar_item.calendar_name}")
-      SlackNotifier.notifier_instance.post(text: CELERATION_ENCOURAGEMENT_STATEMENT)
+    def sends_birthday_notification(mention:, calendar_name:)
+      SlackNotifier.post(text: "#{BIRTHDAY_STATEMENT}")
+      SlackNotifier.post(text: "<#{mention}>#{calendar_name}　:tada: :tada:")
+      SlackNotifier.post(text: CELERATION_ENCOURAGEMENT_STATEMENT)
     end
 
     def sends_no_shift_notification
-      SlackNotifier.notifier_instance.post(text: NO_SHIFT_STATEMENT)
+      SlackNotifier.post(text: NO_SHIFT_STATEMENT)
     end
   end
 end

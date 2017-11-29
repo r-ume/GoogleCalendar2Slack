@@ -12,12 +12,13 @@ class MentorRegistry
   # @return MentorRegistry
   def initialize
     @settings = YAML.load_file(MENTOR_CONFIG_FILENAME)
+    @list = {}
   end
 
   # Find mentors who has a specific name
   # @return Mentor
   def find_by_name(name)
-    Mentor.new(@settings[name])
+    @list[name] ||= Mentor.new(@settings[name])
   end
 
 end

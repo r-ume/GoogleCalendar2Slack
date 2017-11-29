@@ -14,12 +14,14 @@ class Calendar
   # @return GoogleCalendarItem[]
   class << self
     def shifts_tomorrow
-      tomorrow_shifts = ids.map { |calendar_id|
-        @@calendar.list_events(calendar_id).items.select { |event|
-          CalendarItem.new( { calendar_name: event.summary, start_time: event.start.date_time } ).tomorrow_shift?
+      tomorrow_shifts = []
+      ids.each { |calendar_id|
+        @@calendar.list_events(calendar_id).items.each { |event|
+          calendar_item = CalendarItem.new( { calendar_name: event.summary, start_time: event.start.date_time } )
+          tomorrow_shifts.push(calendar_item) if calendar_item.tomorrow_shift?
         }
       }
-      tomorrow_shifts.flatten.map{ |shift| CalendarItem.new( { calendar_name: shift.summary, start_time: shift.start.date_time } )}
+      tomorrow_shifts
     end
 
     private
