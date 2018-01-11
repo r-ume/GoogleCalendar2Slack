@@ -1,4 +1,6 @@
 .env
 .idea/
 .credentials/
-.client_secret.json
+client_secret.json
+.bundle
+vendor/bundle
