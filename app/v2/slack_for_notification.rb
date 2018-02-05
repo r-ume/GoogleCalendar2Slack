@@ -20,8 +20,7 @@ class SlackForNotification
 
     def sends_guidance_notification(mention:, calendar_name:, start_time:)
       SlackNotifier.post(text: GUIDANCE_STATEMENT)
-      SlackNotifier.post(text: "<#{mention}>#{calendar_name}")
-
+      SlackNotifier.post(text: "<#{mention}>#{calendar_name}: #{start_time}")
     end
 
     def sends_no_guidance_notification

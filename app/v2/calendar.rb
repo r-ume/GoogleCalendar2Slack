@@ -14,12 +14,10 @@ class Calendar
   # @return GoogleCalendarItem[]
   class << self
     def shifts_tomorrow
-      events.select { |event|
-        calendar_item = CalendarItem.new(calendar_name: event.summary,
-                                         start_time: event.start.date_time,
-                                         end_time: event.end.date_time)
-        return calendar_item if calendar_item.tomorrow_shift?
-      }
+      events.map { |event|
+        CalendarItem.new(calendar_name: event.summary,
+                         start_time: event.start.date_time, end_time: event.end.date_time)
+      }.select(&:tomorrow_shift?)
     end
 
     private

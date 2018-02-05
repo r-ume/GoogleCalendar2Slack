@@ -30,8 +30,8 @@ class CalendarItem
   # Get the mentor who is in charged of the guidance item on the calendar.
   # This method rejects guidance item itself.
   # @return CalendarItem
-  def guidance_mentor_item(calendar_item)
-    @start_time.between?(calendar_item.start_time, calendar_item.end_time) && !for_guidance?
+  def guidance_mentor_item?(calendar_item)
+    calendar_item.start_time.between?(self.start_time, self.end_time) && !for_guidance?
   end
 
   # Checks if calendar_item is a tomorrow_shift
