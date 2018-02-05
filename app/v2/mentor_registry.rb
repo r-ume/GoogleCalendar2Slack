@@ -11,7 +11,7 @@ class MentorRegistry
   # Factory, setup registry
   # @return MentorRegistry
   def initialize
-    @settings = YAML.load_file(MENTOR_CONFIG_FILENAME)
+    @settings = YAML.load_file("#{File.expand_path('')}/#{MENTOR_CONFIG_FILENAME}")
     @list = {}
   end
 
