@@ -1,8 +1,8 @@
 require 'rubygems'
 require 'dotenv'
 require 'pry'
-require './util/google_authentication'
-require '../v2/calendar_item'
+require_relative './util/google_authentication'
+require_relative './calendar_item'
 
 Dotenv.overload
 
@@ -14,19 +14,26 @@ class Calendar
   # @return GoogleCalendarItem[]
   class << self
     def shifts_tomorrow
-      tomorrow_shifts = []
-      ids.each { |calendar_id|
-        @@calendar.list_events(calendar_id).items.each { |event|
-          calendar_item = CalendarItem.new( { calendar_name: event.summary, start_time: event.start.date_time } )
-          tomorrow_shifts.push(calendar_item) if calendar_item.tomorrow_shift?
-        }
+      events.select { |event|
+        calendar_item = CalendarItem.new(calendar_name: event.summary,
+                                         start_time: event.start.date_time,
+                                         end_time: event.end.date_time)
+        return calendar_item if calendar_item.tomorrow_shift?
       }
-      tomorrow_shifts
     end
 
     private
+
+    # Get the id of all calendars other than the one registered by the account.
+    # @return string[]
     def ids
       @@calendar.list_calendar_lists.items.reject{ |calendar| calendar.id == ENV['GMAIL_ACCOUNT'] }.map(&:id)
+    end
+
+    # Get all the events registered on each calendar.
+    # @return Google::Apis::CalendarV3::Event[]
+    def events
+      ids.flat_map { |calendar_id| @@calendar.list_events(calendar_id).items }
     end
   end
 
