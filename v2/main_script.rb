@@ -15,12 +15,6 @@ else
   SlackForNotification.sends_starter_notification
 
   shifts_tomorrow.each do |calendar_item|
-    SlackForNotification.sends_shift_notification(
-        mention:       calendar_item.mentor.mention,
-        calendar_name: calendar_item.calendar_name,
-        start_time:    calendar_item.start_time
-    )
-
     if calendar_item.mentor.day_before_birthday?
       SlackForNotification.sends_birthday_notification(
           mention:       calendar_item.mentor.mention,

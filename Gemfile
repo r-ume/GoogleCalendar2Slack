@@ -15,9 +15,6 @@ group :production, :development do
   # SLACK NOTIFICATION
   gem 'slack-notifier'
 
-  # ENUM
-  gem 'ruby-enum'  
-
   # Cron Job
   gem 'whenever'
 end
