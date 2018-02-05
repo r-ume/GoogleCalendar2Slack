@@ -1,4 +1,8 @@
+require 'rubygems'
 require 'slack-notifier'
+require 'dotenv'
+
+Dotenv.load('../.env')
 
 # Slack Notifier
 class SlackNotifier
@@ -6,7 +10,10 @@ class SlackNotifier
 
   class << self
     def notifier
-      @notifier ||= Slack::Notifier.new(ENV['TIMES_JIO_SLACK_WEBHOOK_URL'], username: 'TECH::CAMP WASEDA SHIFT REMINDER')
+      @notifier ||= Slack::Notifier.new(
+          ENV['TIMES_JIO_SLACK_WEBHOOK_URL'],
+          username: 'TECH::CAMP WASEDA SHIFT REMINDER'
+      )
     end
 
     def post(text:)

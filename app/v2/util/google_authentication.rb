@@ -8,8 +8,8 @@ require 'googleauth/stores/file_token_store'
 class GoogleAuthentication
   SCOPE               = Google::Apis::CalendarV3::AUTH_CALENDAR_READONLY
   OOB_URI             = 'urn:ietf:wg:oauth:2.0:oob'
-  CLIENT_SECRETS_PATH = File.join(File.expand_path("..", Dir.pwd), 'client_secret.json')
-  CREDENTIALS_PATH    = File.join(File.expand_path("..", Dir.pwd), '.credentials', 'calendar_ruby_sample_quickstart.yaml')
+  CLIENT_SECRETS_PATH = File.join(File.expand_path('', Dir.pwd), 'client_secret.json')
+  CREDENTIALS_PATH    = File.join(File.expand_path('', Dir.pwd), '.credentials', 'calendar_ruby_sample_quickstart.yaml')
 
   class << self
     def access_to_calendar_service

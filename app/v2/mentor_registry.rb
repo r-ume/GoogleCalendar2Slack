@@ -1,7 +1,7 @@
 require 'yaml'
 require 'pry'
 require 'singleton'
-require '../v2/mentor'
+require_relative './mentor'
 
 # List of Mentors
 class MentorRegistry

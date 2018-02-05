@@ -1,7 +1,7 @@
 require 'rubygems'
 require 'pry'
-require '../v2/util/slack_notifier'
-require '../v2/calendar_item'
+require_relative './util/slack_notifier'
+require_relative './calendar_item'
 
 # Slack
 class SlackForNotification
