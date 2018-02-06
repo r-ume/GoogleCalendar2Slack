@@ -15,6 +15,12 @@ class CalendarItem
     @end_time      = end_time
   end
 
+  # Return the formatted start time.
+  # @return string
+  def str_start_time
+    @start_time.strftime('%Y:%m:%d %H-%M-%S')
+  end
+
   # Return a mentor who is a participant of this calendar item.
   # @return Mentor
   def mentor

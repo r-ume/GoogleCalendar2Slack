@@ -18,9 +18,9 @@ class SlackForNotification
       SlackNotifier.post(text: CELERATION_ENCOURAGEMENT_STATEMENT)
     end
 
-    def sends_guidance_notification(mention:, calendar_name:, start_time:)
+    def sends_guidance_notification(mention:, calendar_name:, guidance_name:, start_time:)
       SlackNotifier.post(text: GUIDANCE_STATEMENT)
-      SlackNotifier.post(text: "<#{mention}>#{calendar_name}: #{start_time}")
+      SlackNotifier.post(text: "#{guidance_name} : 担当メンター <#{mention}> #{calendar_name} : #{start_time}")
     end
 
     def sends_no_guidance_notification

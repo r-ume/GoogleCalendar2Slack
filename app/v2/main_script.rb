@@ -32,7 +32,8 @@ else
         SlackForNotification.sends_guidance_notification(
           mention:       guidance_mentor_item.mentor.mention,
           calendar_name: guidance_mentor_item.calendar_name,
-          start_time:    guidance_mentor_item.start_time
+          guidance_name: calendar_item.calendar_name,
+          start_time:    guidance_mentor_item.str_start_time
         )
       end
     end
