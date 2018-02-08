@@ -4,9 +4,6 @@ require_relative './mentor_registry'
 class CalendarItem
   attr_accessor :calendar_name, :start_time, :end_time
 
-  TOMORROW           = Date.today + 1
-  DAY_AFTER_TOMORROW = TOMORROW + 1
-
   # Constructor
   # @return CalendarItem
   def initialize(calendar_name:, start_time:, end_time:)
@@ -56,6 +53,8 @@ class CalendarItem
   # Checks if the calendar item is from today to tomorrow.
   # @return Boolean
   def between_tomorrow_and_the_day_after_tomorrow?
-    @start_time.between?(TOMORROW, DAY_AFTER_TOMORROW)
+    tomorrow = Date.today + 1
+    day_after_tomorrow = Date.today + 2
+    @start_time.between?(tomorrow, day_after_tomorrow)
   end
 end
