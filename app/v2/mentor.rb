@@ -11,9 +11,9 @@ class Mentor
   end
 
   # Return the mention on slack in data instance variable.
-  # @return String
+  # @return string or nil
   def mention
-    @mention = @data.presence || nil
+    @data['mention'].presence || nil
   end
 
   # Check if his/her birth day is a day before the given date.

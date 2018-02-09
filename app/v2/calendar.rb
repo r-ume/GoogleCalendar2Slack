@@ -34,5 +34,4 @@ class Calendar
       ids.flat_map { |calendar_id| @@calendar.list_events(calendar_id).items }
     end
   end
-
 end
