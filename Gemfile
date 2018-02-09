@@ -17,6 +17,9 @@ group :production, :development do
 
   # Cron Job
   gem 'whenever'
+
+  # ACTIVE SUPPORT
+  gem 'activesupport'
 end
 
 group :development do
