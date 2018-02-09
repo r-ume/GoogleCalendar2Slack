@@ -1,3 +1,5 @@
+require 'rubygems'
+require 'active_support/all'
 require_relative './mentor_registry'
 
 # Data object to wrap and carry an item originally from Google Calendar.
@@ -40,15 +42,10 @@ class CalendarItem
   # Checks if calendar_item is a tomorrow_shift
   # @return Boolean
   def tomorrow_shift?
-    start_time_nil? && between_tomorrow_and_the_day_after_tomorrow?
+    @start_time.present? && between_tomorrow_and_the_day_after_tomorrow?
   end
 
   private
-  # Checks if the calendar item object does not have any start_time in it.
-  # @return Boolean
-  def start_time_nil?
-    !@start_time.nil?
-  end
 
   # Checks if the calendar item is from today to tomorrow.
   # @return Boolean

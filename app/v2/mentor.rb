@@ -1,3 +1,6 @@
+require 'rubygems'
+require 'active_support/all'
+
 # Mentor
 class Mentor
   # Constructor
@@ -10,7 +13,7 @@ class Mentor
   # Return the mention on slack in data instance variable.
   # @return String
   def mention
-    @mention = @data.nil? ? nil : @data['mention']
+    @mention = @data.presence || nil
   end
 
   # Check if his/her birth day is a day before the given date.
