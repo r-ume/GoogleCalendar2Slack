@@ -1,7 +1,7 @@
 require 'yaml'
 require 'pry'
 require 'singleton'
-require '../v2/mentor'
+require_relative './mentor'
 
 # List of Mentors
 class MentorRegistry
@@ -11,14 +11,17 @@ class MentorRegistry
   # Factory, setup registry
   # @return MentorRegistry
   def initialize
-    @settings = YAML.load_file(MENTOR_CONFIG_FILENAME)
+    @settings = YAML.load_file("#{File.expand_path('')}/#{MENTOR_CONFIG_FILENAME}")
     @list = {}
   end
 
   # Find mentors who has a specific name
   # @return Mentor
   def find_by_name(name)
-    @list[name] ||= Mentor.new(@settings[name])
+    mention  = @settings[name].present? ? @settings[name]['mention'] : nil
+    birthday = @settings[name].present? ? @settings[name]['birthday'] : nil
+
+    @list[name] ||= Mentor.new(mention: mention, birthday: birthday)
   end
 
 end

@@ -5,18 +5,25 @@ git_source(:github) do |repo_name|
   "https://github.com/#{repo_name}.git"
 end
 
-# DEBUG
-gem 'pry'
-gem 'pry-byebug'
+group :production, :development do
+  # FUNDAMENTAL
+  gem 'dotenv'
 
-# FUNDAMENTAL
-gem 'dotenv'
+  # GOOGLE API CLIENT
+  gem 'google-api-client'
 
-# GOOGLE API CLIENT
-gem 'google-api-client'
+  # SLACK NOTIFICATION
+  gem 'slack-notifier'
 
-# SLACK NOTIFICATION
-gem 'slack-notifier'
+  # Cron Job
+  gem 'whenever'
 
-# ENUM
-gem 'ruby-enum'
+  # ACTIVE SUPPORT
+  gem 'activesupport'
+end
+
+group :development do
+  # DEBUG
+  gem 'pry'
+  gem 'pry-byebug'
+end
