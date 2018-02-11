@@ -1,6 +1,6 @@
 env :PATH, ENV['PATH']
-set :output, { standard: 'cron/standard.log', error: 'cron/error.log' }
+set :output, { error: 'cron/error.log' }
 
 every 1.day, at: '09:00 pm' do
-  command 'cd /Users/umeki/Desktop/Ruby/NotificationOnSlack && sh cron_script.sh'
+  command "cd #{File.join(File.expand_path('', Dir.pwd)} && sh cron_script.sh"
 end
