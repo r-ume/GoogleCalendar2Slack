@@ -25,7 +25,7 @@ begin
       )
     end
 
-    if calendar_item.for_guidance?
+    if calendar_item.guidance? || calendar_item.counseling?
       guidance_mentor_items = shifts_tomorrow.select{ |tomorrow_shift|
         tomorrow_shift.guidance_mentor_item?(calendar_item: calendar_item)
       }

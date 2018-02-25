@@ -28,7 +28,13 @@ class CalendarItem
 
   # Checks if the calendar_item is for guidance
   # @return boolean
-  def for_guidance?
+  def guidance?
+    @calendar_name.include?('ガイダンス')
+  end
+
+  # Checks if the calendar_item is for counseling
+  # @return boolean
+  def counseling?
     @calendar_name.include?('面談')
   end
 
