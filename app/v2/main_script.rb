@@ -12,7 +12,7 @@ Dotenv.overload
 
 shifts_tomorrow = Calendar.shifts_tomorrow
 
-if shifts_tomorrow.blank? || shifts_tomorrow.none?(&:for_guidance?)
+if shifts_tomorrow.blank? || shifts_tomorrow.none?(&:guidance?) || shifts_tomorrow.none?(&:counseling?)
   return SlackForNotification.sends_no_guidance_notification
 end
 
