@@ -4,20 +4,21 @@ require_relative './mentor_registry'
 
 # Data object to wrap and carry an item originally from Google Calendar.
 class CalendarItem
-  attr_accessor :calendar_name, :start_time, :end_time
+  attr_accessor :calendar_name, :start_time, :end_time, :email
 
   # Constructor
   # @return CalendarItem
-  def initialize(calendar_name:, start_time:, end_time:)
+  def initialize(calendar_name:, start_time:, end_time:, email:)
     @calendar_name = calendar_name
     @start_time    = start_time
     @end_time      = end_time
+    @email         = email
   end
 
   # Return the formatted start time.
   # @return string
   def str_start_time
-    @start_time.strftime('%Y:%m:%d %H-%M-%S') if @start_time.present?
+    @start_time.strftime('%Y:%m:%d %H:%M:%S') if @start_time.present?
   end
 
   # Return a mentor who is a participant of this calendar item.
@@ -29,20 +30,14 @@ class CalendarItem
   # Checks if the calendar_item is for guidance
   # @return boolean
   def guidance?
-    @calendar_name.include?('ガイダンス')
-  end
-
-  # Checks if the calendar_item is for counseling
-  # @return boolean
-  def counseling?
-    @calendar_name.include?('面談')
+    @email == ENV['GUIDANCE_EMAIL']
   end
 
   # Get the mentor who is in charged of the guidance item on the calendar.
   # This method rejects guidance item itself.
   # @return CalendarItem
   def guidance_mentor_item?(calendar_item:)
-    calendar_item.start_time.between?(self.start_time, self.end_time) && !guidance? && !counseling?
+    self.start_time >= calendar_item.start_time && self.end_time > calendar_item.end_time
   end
 
   # Checks if calendar_item is a tomorrow_shift
