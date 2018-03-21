@@ -18,7 +18,7 @@ class CalendarItem
   # Return the formatted start time.
   # @return string
   def str_start_time
-    @start_time.strftime('%Y:%m:%d %H:%M:%S') if @start_time.present?
+    @start_time.strftime('%Y:%m:%d %H:%M') if @start_time.present?
   end
 
   # Return a mentor who is a participant of this calendar item.
