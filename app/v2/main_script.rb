@@ -12,7 +12,7 @@ Dotenv.overload
 
 shifts_tomorrow = Calendar.shifts_tomorrow
 
-if shifts_tomorrow.blank? || shifts_tomorrow.none?(&:guidance?) || shifts_tomorrow.none?(&:counseling?)
+if shifts_tomorrow.blank? || shifts_tomorrow.none?(&:guidance?)
   return SlackForNotification.sends_no_guidance_notification
 end
 
@@ -25,9 +25,9 @@ begin
       )
     end
 
-    if calendar_item.guidance? || calendar_item.counseling?
-      guidance_mentor_items = shifts_tomorrow.select{ |tomorrow_shift|
-        tomorrow_shift.guidance_mentor_item?(calendar_item: calendar_item)
+    if calendar_item.guidance?
+      guidance_mentor_items = shifts_tomorrow.select{ |shift_tomorrow|
+        shift_tomorrow.guidance_mentor_item?(calendar_item: calendar_item)
       }
 
       guidance_mentor_items.each do |guidance_mentor_item|
