@@ -16,7 +16,9 @@ class Calendar
     def shifts_tomorrow
       events.map { |event|
         CalendarItem.new(calendar_name: event.summary,
-                         start_time: event.start.date_time, end_time: event.end.date_time)
+                         start_time:    event.start.date_time,
+                         end_time:      event.end.date_time,
+                         email:         event.organizer.email)
       }.select(&:tomorrow_shift?)
     end
 
