@@ -22,8 +22,10 @@ group :production, :development do
   gem 'activesupport'
 end
 
-group :development do
+group :development, :test do
   # DEBUG
   gem 'pry'
   gem 'pry-byebug'
+
+  gem 'test-unit'
 end
